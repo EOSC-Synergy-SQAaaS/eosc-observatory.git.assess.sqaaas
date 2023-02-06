@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/madgeek-arc/eosc-observatory:
+      branch: main
+      repo: https://github.com/madgeek-arc/eosc-observatory.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/madgeek-arc/eosc-observatory git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-aquamarine-toucan.sh
+        container: qc.acc_sleepy-coral-pig
+  QC.Doc:
+    repos:
+      github.com/madgeek-arc/eosc-observatory find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-amethyst-iguana.sh
+        container: qc.doc_lanky-cerulean-ragdoll
+      github.com/madgeek-arc/eosc-observatory git:
+        commands:
+        - /usr/bin/env sh .sqa/script.skimpy-indigo-eagle.sh
+        container: qc.doc_foggy-smalt-kakapo
+  QC.Lic:
+    repos:
+      github.com/madgeek-arc/eosc-observatory licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.chummy-cerulean-camel.sh
+        container: qc.lic_nerdy-brass-dachsbracke
+  QC.Sty:
+    repos:
+      github.com/madgeek-arc/eosc-observatory checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-silver-wildebeest.sh
+        container: qc.sty_beady-coral-kakapo
+      github.com/madgeek-arc/eosc-observatory hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.lousy-seashell-weasel.sh
+        container: qc.sty_lousy-heliotrope-dragon
+      github.com/madgeek-arc/eosc-observatory jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-rust-wolf.sh
+        container: qc.sty_greasy-goldenrod-liger
+  QC.Ver:
+    repos:
+      github.com/madgeek-arc/eosc-observatory get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.blurry-olivine-lion.sh
+        container: qc.ver_snazzy-lime-pinscher
+timeout: 5400
